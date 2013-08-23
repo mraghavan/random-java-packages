@@ -60,25 +60,10 @@ public class EditDistance {
       double[][] dist,
       int i,
       int j) {
-    double add = addCost;
-    double del = delCost;
-    double sub = 0;
-    if (j > 0) {
-      add += dist[i][j - 1];
-    } else {
-      add += (i + 1) * delCost;
-      sub = j;
-    }
-    if (i > 0) {
-      del += dist[i - 1][j];
-    } else {
-      del += (j + 1) * addCost;
-      sub = sub == 0 ? i : sub;
-    }
-    if (i > 0 && j > 0) {
-      sub = sub == 0 ? dist[i - 1][j - 1] : sub;
-    }
-    sub += (from.charAt(i - 1) == to.charAt(j - 1) ? 0 : subCost);
+    double add = addCost + dist[i][j - 1];
+    double del = delCost + dist[i - 1][j];
+    double sub = dist[i - 1][j - 1] +
+      (from.charAt(i - 1) == to.charAt(j - 1) ? 0 : subCost);
     return Math.min(add, Math.min(del, sub));
   }
 }
