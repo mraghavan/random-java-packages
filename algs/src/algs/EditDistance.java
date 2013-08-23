@@ -49,7 +49,6 @@ public class EditDistance {
         } else {
           dist[i][j] = findDistance(from, to, dist, i, j);
         }
-        System.out.println(i + " " + j + " " + dist[i][j]);
       }
     }
     return dist[dist.length - 1][dist[0].length - 1];
@@ -69,7 +68,6 @@ public class EditDistance {
     } else {
       add += (i + 1) * delCost;
       sub = j;
-      System.out.println("set sub to j");
     }
     if (i > 0) {
       del += dist[i - 1][j];
@@ -81,7 +79,6 @@ public class EditDistance {
       sub = sub == 0 ? dist[i - 1][j - 1] : sub;
     }
     sub += (from.charAt(i - 1) == to.charAt(j - 1) ? 0 : subCost);
-    System.out.println("  " + add + " " + del + " " + sub);
     return Math.min(add, Math.min(del, sub));
   }
 }
